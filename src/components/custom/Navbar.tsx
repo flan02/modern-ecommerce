@@ -1,20 +1,23 @@
 import Link from "next/link"
-import MaxWidthWrapper from "./MaxWidthWrapper"
+import MaxWidthWrapper from "../reutilizable/MaxWidthWrapper"
 import { buttonVariants } from "../ui/button"
 import { ArrowRight } from "lucide-react"
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 
 
 type Props = {}
 
-const NavBar = (props: Props) => {
-  const user = undefined
-  const isAdmin = false
+// * This component runs on server side not on client side
+const NavBar = async (props: Props) => {
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
+  const isAdmin = user?.email === process.env.ADMIN_EMAIL
   return (
     <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-            case<span className="text-green-600">cobra</span>
+            star<span className="text-[#7C3AED]">purple</span>
           </Link>
           <div className="h-full flex items-center space-x-4">
             {

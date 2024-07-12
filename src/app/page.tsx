@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import { Icons } from "@/components/custom/Icons";
 import Phone from "@/components/custom/Phone";
+import StarPurple from "@/components/custom/StarPurple";
 import MaxWidthWrapper from "@/components/reutilizable/MaxWidthWrapper";
 import { Check, Star } from "lucide-react";
 
@@ -12,7 +14,7 @@ export default function Home() {
           <div className="col-span-2 px-6 lg:px-0 lg:pt-4">
             <div className="relative mx-auto text-center lg:text-left flex flex-col items-center lg:items-start">
               <div className="absolute w-28 left-0 -top-20 hidden lg:block">
-                <img src="/snake-1.png" alt="snake" className="w-full" />
+                <StarPurple className="ml-8" />
               </div>
               <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight text-gray-900 text-5xl md:text-6xl lg:text-7xl">Your Image on a <span className="bg-[#7C3AED] px-2 text-white">Custom</span> Phone Case</h1>
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
@@ -67,6 +69,43 @@ export default function Home() {
               <Phone
                 className="w-64"
                 imgSrc="/testimonials/1.jpg" />
+            </div>
+          </div>
+        </MaxWidthWrapper>
+      </section>
+
+      {/* value proposition section */}
+      <section className="bg-slate-100 py-24">
+        <MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-32">
+          <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-6">
+            <h2 className="order-1 mt-2 tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-gray-900">What our <span className="relative pl-2 mr-1">customers <Icons.underline className="hidden sm:block pointer-events-none absolute inset-x-0 -bottom-6 text-[#7C3AED]" /></span>  say </h2>
+            <StarPurple className="order-0 lg:order-2" />
+          </div>
+
+          <div className="mx-auto max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
+            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+              <div className="flex gap-0.5 mb-2">
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                <Star className="h-5 w-5 text-green-600 fill-green-600" />
+              </div>
+              <div className="text-lg leading-8 ">
+                <p>
+                  &quot;The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and <span className="p-0.5 bg-slate-800 text-white"> the image is super clear </span>, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.&quot;
+                </p>
+              </div>
+              <div className="flex gap-4 mt-2">
+                <img src="/users/user-1.png" className="rounded-full h-12 w-12 object-cover" alt="user-1" />
+                <div className="flex flex-col">
+                  <p className="font-semibold">Bruno</p>
+                  <div className="flex gap-1.5 items-center text-zinc-600">
+                    <Check className="h-4 w-4 stroke-[3px] text-green-600" />
+                    <p className="text-sm">Verified Purchase</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </MaxWidthWrapper>
