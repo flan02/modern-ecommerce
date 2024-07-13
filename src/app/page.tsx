@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Icons } from "@/components/custom/Icons";
 import Phone from "@/components/custom/Phone";
+import Reviews from "@/components/custom/Reviews";
 import StarPurple from "@/components/custom/StarPurple";
+import TestimonialCard from "@/components/custom/TestimonialCard";
 import MaxWidthWrapper from "@/components/reutilizable/MaxWidthWrapper";
 import { Check, Star } from "lucide-react";
 
@@ -82,33 +84,15 @@ export default function Home() {
             <StarPurple className="order-0 lg:order-2" />
           </div>
 
-          <div className="mx-auto max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
-            <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
-              <div className="flex gap-0.5 mb-2">
-                <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                <Star className="h-5 w-5 text-green-600 fill-green-600" />
-              </div>
-              <div className="text-lg leading-8 ">
-                <p>
-                  &quot;The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and <span className="p-0.5 bg-slate-800 text-white"> the image is super clear </span>, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.&quot;
-                </p>
-              </div>
-              <div className="flex gap-4 mt-2">
-                <img src="/users/user-1.png" className="rounded-full h-12 w-12 object-cover" alt="user-1" />
-                <div className="flex flex-col">
-                  <p className="font-semibold">Bruno</p>
-                  <div className="flex gap-1.5 items-center text-zinc-600">
-                    <Check className="h-4 w-4 stroke-[3px] text-green-600" />
-                    <p className="text-sm">Verified Purchase</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-12 mx-auto max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
+            <TestimonialCard userImg="/users/user-1.png" userName="Bruno" testimony={`The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and the image is super clear, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.`} />
+            <TestimonialCard userImg="/users/user-2.png" userName="Luciana" testimony={`I usually keep my phone together with my keys in my pocket and that led to some pretty heavy sractmarks on all of my last phone cases. This one, besides a barely noticeable scratch on the corner, looks brand new after about half a year. I dig it.`} />
           </div>
         </MaxWidthWrapper>
+
+        <div className="pt-16">
+          <Reviews />
+        </div>
       </section>
     </main>
   );
