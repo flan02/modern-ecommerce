@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { cn } from "@/lib/utils"
 import { Check, Star } from "lucide-react"
 import React from "react"
 
@@ -7,11 +8,12 @@ type Props = {
   testimony: string
   userName: string
   userImg: string
+  className?: string
 }
 
-const TestimonialCard = ({ testimony, userName, userImg }: Props) => {
+const TestimonialCard = ({ testimony, userName, userImg, className }: Props) => {
   return (
-    <div className="flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20">
+    <div className={cn("flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20 h-max items-center", className)}>
       <div className="flex gap-0.5 mb-2">
         <Star className="h-5 w-5 text-green-600 fill-green-600" />
         <Star className="h-5 w-5 text-green-600 fill-green-600" />

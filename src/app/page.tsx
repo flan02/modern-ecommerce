@@ -12,7 +12,8 @@ import { Check, Star } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="bg-slate-50">
+    <div className="bg-slate-50">
+
       <section>
         <MaxWidthWrapper className="pb-24 pt-10 lg:grid lg:grid-cols-3 sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52">
           <div className="col-span-2 px-6 lg:px-0 lg:pt-4">
@@ -86,9 +87,9 @@ export default function Home() {
             <StarPurple className="order-0 lg:order-2" />
           </div>
 
-          <div className="space-y-12 mx-auto max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16">
-            <TestimonialCard userImg="/users/user-1.png" userName="Bruno" testimony={`The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and the image is super clear, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.`} />
-            <TestimonialCard userImg="/users/user-2.png" userName="Luciana" testimony={`I usually keep my phone together with my keys in my pocket and that led to some pretty heavy sractmarks on all of my last phone cases. This one, besides a barely noticeable scratch on the corner, looks brand new after about half a year. I dig it.`} />
+          <div className="space-y-12 mx-auto max-w-2xl grid grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16 items-center">
+            <TestimonialCard className="mt-12" userImg="/users/user-2.png" userName="Luciana" testimony={`I usually keep my phone together with my keys in my pocket and that led to some pretty heavy sractmarks on all of my last phone cases. This one, besides a barely noticeable scratch on the corner, looks brand new after about half a year. I dig it.`} />
+            <TestimonialCard className="pl-4" userImg="/users/user-1.png" userName="Bruno" testimony={`The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and the image is super clear, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.`} />
           </div>
         </MaxWidthWrapper>
 
@@ -116,7 +117,7 @@ export default function Home() {
           <CheckMarks />
         </MaxWidthWrapper>
       </section>
-    </main>
+    </div>
   );
 }
 

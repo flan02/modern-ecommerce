@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/custom/Navbar";
 import Footer from "@/components/custom/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NavBar />
-        {children}
-        <Footer />
+        <div className="flex flex-col min-h-[calc(100vh-3.5rem-1px)]"> {/* 3.5 rem is height of the navbar component */}
+          <main className="flex-1 flex flex-col h-full ">
+            {children}
+          </main>
+          <Footer />
+        </div>
+        <Toaster />
       </body>
     </html>
   );
