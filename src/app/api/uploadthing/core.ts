@@ -1,10 +1,13 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { z } from 'zod';
+import ky from 'ky';
+import sharp from 'sharp';
+import { db } from "@/db";
 
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
+// const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -30,7 +33,30 @@ export const ourFileRouter = {
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       // return { uploadedBy: metadata.userId }
       const { configId } = metadata.input;
-      return { configId } // * This fc happens in the server and sent data to the client
+      const response = await ky.get(file.url)
+      const buffer = await response.arrayBuffer()
+      const imageMetadata = await sharp(buffer).metadata()
+      const { width, height } = imageMetadata
+      if (!configId) {
+        const config = await db.configuration.create({
+          data: {
+            imageUrl: file.url,
+            height: height || 500,
+            width: width || 500
+          }
+        })
+
+        return { configId: config.id } // TODO This fc happens in the server and sent data to the client
+      } else {
+        const updatedConfig = await db.configuration.update({
+          where: { id: configId },
+          data: {
+            croppedImageUrl: file.url,
+          }
+        })
+
+        return { configId: updatedConfig.id } // TODO This fc happens in the server and sent data to the client
+      }
     }),
 } satisfies FileRouter;
 

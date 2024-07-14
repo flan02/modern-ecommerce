@@ -36,7 +36,7 @@ const ConfigurePage = (props: Props) => {
       const configId = data.serverData.configId
       startTransition(() => {
         // This loading state occurs while the user is being redirected to the next page
-        router.push(`/configure/desing?id=${configId}`)
+        router.push(`/configure/design?id=${configId}`) // ? Redirect to a dynamic route [/configure/design/${configId}]
       })
     },
     onUploadProgress(p) {

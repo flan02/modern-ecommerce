@@ -9,3 +9,6 @@ E-commerce new features with nextjs14 and stripe
 
 ## cloudflare
 [Global object storage with zero egress fees](https://www.cloudflare.com/es-es/developer-platform/r2/)
+
+## Neon
+[Serverless platform designed to build scalable app faster integrating your db ](https://neon.tech)
