@@ -12,3 +12,6 @@ E-commerce new features with nextjs14 and stripe
 
 ## Neon
 [Serverless platform designed to build scalable app faster integrating your db ](https://neon.tech)
+
+## Headlessui
+[Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.](https://headlessui.com/)
