@@ -65,7 +65,10 @@ const DesignConfigurator = ({ configId, imgUrl, imgDimensions }: Props) => {
   const { mutate } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (iphone: iphoneCase) => {
-      await Promise.all([saveConfig(), _saveConfig(iphone)])
+      await Promise.all([saveConfig(), _saveConfig(iphone)]) // TODO this two fc will be executed when I called the mutate function
+    },
+    onSuccess: () => {
+      router.push(`/configure/preview?id=${configId}`)
     },
     onError: (error) => {
       toast({
@@ -73,9 +76,6 @@ const DesignConfigurator = ({ configId, imgUrl, imgDimensions }: Props) => {
         description: 'There was an error on our end. Please try again',
         variant: 'destructive'
       })
-    },
-    onSuccess: () => {
-      router.push(`/configure/preview?id=${configId}`)
     }
   })
 
