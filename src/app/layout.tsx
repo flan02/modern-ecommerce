@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/custom/Navbar";
 import Footer from "@/components/custom/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import ReactQueryProvider from "@/components/reutilizable/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
         <NavBar />
         <div className="flex flex-col min-h-[calc(100vh-3.5rem-1px)]"> {/* 3.5 rem is height of the navbar component */}
           <main className="flex-1 flex flex-col h-full ">
-            {children}
+            <ReactQueryProvider>
+              {children}
+            </ReactQueryProvider>
           </main>
           <Footer />
         </div>
