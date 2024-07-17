@@ -3,10 +3,11 @@ import React from 'react'
 import Confetti from 'react-dom-confetti'
 import Phone from './Phone'
 import { Configuration } from '@prisma/client'
-import { COLORS, MODELS } from '@/validators/option-validator'
+import { COLORS, FINISHES, MATERIALS, MODELS } from '@/validators/option-validator'
 import { cn, formatPrice } from '@/lib/utils'
-import { Check } from 'lucide-react'
-import { BASE_PRICE } from '@/config/products'
+import { ArrowRight, Check } from 'lucide-react'
+import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
+import { Button } from '../ui/button'
 
 type Props = {
   configuration: Configuration
@@ -14,9 +15,16 @@ type Props = {
 
 const DesignPreview = ({ configuration }: Props) => {
   const [showConfetti, setShowConfetti] = React.useState(false)
-  const { color, model } = configuration
+  const { color, model, finish, material } = configuration
   const tw = COLORS.find((supportedColor) => supportedColor.value === color)?.tw
   const { label, value } = MODELS.options.find(({ value }) => value === model)!
+
+  let totalPrice = BASE_PRICE
+  if (finish === FINISHES.options[0].value) totalPrice += PRODUCT_PRICES.finish.smooth
+  if (finish === FINISHES.options[1].value) totalPrice += PRODUCT_PRICES.finish.textured
+  if (material === MATERIALS.options[0].value) totalPrice += PRODUCT_PRICES.material.silicone
+  if (material === MATERIALS.options[1].value) totalPrice += PRODUCT_PRICES.material.polycarbonate
+  if (material === MATERIALS.options[2].value) totalPrice += PRODUCT_PRICES.material.leather
 
   React.useEffect(() => setShowConfetti(true), [])
   return (
@@ -62,10 +70,48 @@ const DesignPreview = ({ configuration }: Props) => {
                 <div className='flex items-center justify-between py-1 mt-2'>
                   <p className='text-gray-600'>Base price</p>
                   <p className='font-medium text-gray-900'>
-                    {formatPrice(BASE_PRICE)}
+                    {formatPrice(BASE_PRICE / 100)}
+                  </p>
+                </div>
+                {
+                  finish === FINISHES.options[0].value || finish === FINISHES.options[1].value
+                    ? <div className='flex items-center justify-between py-1 mt-2'>
+                      <p className='text-gray-600'>{`Finish ${finish}`}</p>
+                      <p className='font-medium text-gray-900'>
+                        {formatPrice(finish === FINISHES.options[0].value
+                          ? (PRODUCT_PRICES.finish.smooth / 100)
+                          : (PRODUCT_PRICES.finish.textured / 100)
+                        )}
+                      </p>
+                    </div>
+                    : null
+                }
+                {
+                  material === MATERIALS.options[0].value || material === MATERIALS.options[1].value || material === MATERIALS.options[2].value
+                    ? <div className='flex items-center justify-between py-1 mt-2'>
+                      <p className='text-gray-600'>{`Soft ${material} material`}</p>
+                      <p className='font-medium text-gray-900'>
+                        {formatPrice(material === MATERIALS.options[0].value
+                          ? (PRODUCT_PRICES.material.silicone / 100)
+                          : material === MATERIALS.options[1].value
+                            ? (PRODUCT_PRICES.material.polycarbonate / 100)
+                            : (PRODUCT_PRICES.material.leather / 100)
+                        )}
+                      </p>
+                    </div>
+                    : null
+                }
+                <div className="my-2 h-px bg-gray-200" />
+                <div className="flex items-center justify-between py-2">
+                  <p className='font-semibold text-gray-900'>Order total</p>
+                  <p className="font-semibold text-gray-900">
+                    {formatPrice(totalPrice / 100)}
                   </p>
                 </div>
               </div>
+            </div>
+            <div className="mt-4 flex justify-end pb-12">
+              <Button className='px-4 sm:px-6 lg:px-8'>Check out <ArrowRight className='size-4 ml-1.5 inline' /> </Button>
             </div>
           </div>
         </div>

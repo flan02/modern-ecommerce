@@ -61,4 +61,56 @@ model Configuration {
   material CaseMaterial?
   finish CaseFinish?
   croppedImageUrl String?
+
+  Order Order[] 
+}
+
+model User {
+  id String @id @default(cuid())
+  name String?
+  email String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Order Order[]
+}
+
+model Order {
+  id String @id @default(cuid())
+  configuration Configuration @relation(fields: [configurationId], references: [id])
+  configurationId String
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  amount Float
+  isPaid Boolean @default(false)
+  status OrderStatus
+  ShippingAddress ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
+  shippingAddressId String?
+  BillingAddress BillingAddress? @relation(fields: [billingAddressId], references: [id])
+  billingAddressId String?
+}
+
+model ShippingAddress {
+  id String @id @default(cuid())
+  name String
+  street String
+  city String
+  postalCode String
+  country String
+  state String?
+  phone String?
+  orders Order[]
+}
+
+model BillingAddress {
+  id String @id @default(cuid())
+  name String
+  street String
+  city String
+  postalCode String
+  country String
+  state String?
+  phone String?
+  orders Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
