@@ -9,16 +9,26 @@ import { ArrowRight, Check } from 'lucide-react'
 import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { Button } from '../ui/button'
 import { useMutation } from '@tanstack/react-query'
+import { createCheckoutSession } from '@/app/configure/preview/action'
+import { useRouter } from 'next/navigation'
+import { useToast } from '../ui/use-toast'
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import LoginModal from './LoginModal'
 
 type Props = {
   configuration: Configuration
 }
 
 const DesignPreview = ({ configuration }: Props) => {
+  const router = useRouter()
+  const { toast } = useToast()
   const [showConfetti, setShowConfetti] = React.useState(false)
   const { color, model, finish, material } = configuration
   const tw = COLORS.find((supportedColor) => supportedColor.value === color)?.tw
   const { label, value } = MODELS.options.find(({ value }) => value === model)!
+
+  const { user } = useKindeBrowserClient()
+  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState<boolean>(false)
 
   let totalPrice = BASE_PRICE
   if (finish === FINISHES.options[0].value) totalPrice += PRODUCT_PRICES.finish.smooth
@@ -27,10 +37,34 @@ const DesignPreview = ({ configuration }: Props) => {
   if (material === MATERIALS.options[1].value) totalPrice += PRODUCT_PRICES.material.polycarbonate
   if (material === MATERIALS.options[2].value) totalPrice += PRODUCT_PRICES.material.leather
 
-  const { } = useMutation({
+  const { mutate: createPaymentSession } = useMutation({
     mutationKey: ["get-checkout-session"],
-    mutationFn: 
+    mutationFn: createCheckoutSession,
+    onSuccess: ({ url }) => {
+      if (url) router.push(url)
+      else throw new Error('Unable to retrieve payment URL.')
+    },
+    onError: (error) => {
+      //console.error(error)
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error on our end. Please try again.',
+        variant: 'destructive'
+      })
+    }
   })
+
+  const handleCheckout = () => {
+    if (user) {
+      // create payment session
+      createPaymentSession({ configId: configuration.id })
+
+    } else {
+      // need to log in
+      localStorage.setItem('configurationId', configuration.id)
+      setIsLoginModalOpen(true)
+    }
+  }
 
   React.useEffect(() => setShowConfetti(true), [])
   return (
@@ -38,6 +72,7 @@ const DesignPreview = ({ configuration }: Props) => {
       <div aria-hidden="true" className="pointer-events-none select-none absolute inset-0 overflow-hidden flex justify-center">
         <Confetti active={showConfetti} config={{ elementCount: 200, spread: 90 }} />
       </div>
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <div className="grid grid-cols-1 px-16 sm:px-0 text-sm sm:grid-cols-2 lg:grid-cols-12 md:gap-x-8 lg:gap-x-12 mt-20 mb-8">
         <div className="md:col-span-4 md:row-span-2 md:row-end-2">
           <Phone
@@ -117,7 +152,9 @@ const DesignPreview = ({ configuration }: Props) => {
               </div>
             </div>
             <div className="mt-4 flex justify-end pb-12">
-              <Button className='px-4 sm:px-6 lg:px-8'>Check out <ArrowRight className='size-4 ml-1.5 inline' /> </Button>
+              <Button
+                onClick={handleCheckout}
+                className='px-4 sm:px-6 lg:px-8'>Check out <ArrowRight className='size-4 ml-1.5 inline' /> </Button>
             </div>
           </div>
         </div>

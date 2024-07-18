@@ -15,3 +15,6 @@ E-commerce new features with nextjs14 and stripe
 
 ## Headlessui
 [Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.](https://headlessui.com/)
+
+# Stripe test number card
+4242 4242 4242 4242 04/42 242 42424
