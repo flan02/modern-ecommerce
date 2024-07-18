@@ -8,6 +8,7 @@ import { cn, formatPrice } from '@/lib/utils'
 import { ArrowRight, Check } from 'lucide-react'
 import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { Button } from '../ui/button'
+import { useMutation } from '@tanstack/react-query'
 
 type Props = {
   configuration: Configuration
@@ -25,6 +26,11 @@ const DesignPreview = ({ configuration }: Props) => {
   if (material === MATERIALS.options[0].value) totalPrice += PRODUCT_PRICES.material.silicone
   if (material === MATERIALS.options[1].value) totalPrice += PRODUCT_PRICES.material.polycarbonate
   if (material === MATERIALS.options[2].value) totalPrice += PRODUCT_PRICES.material.leather
+
+  const { } = useMutation({
+    mutationKey: ["get-checkout-session"],
+    mutationFn: 
+  })
 
   React.useEffect(() => setShowConfetti(true), [])
   return (
