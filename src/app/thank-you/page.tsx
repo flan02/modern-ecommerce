@@ -1,10 +1,14 @@
-import React from 'react'
+import Thankyou from '@/components/custom/Thankyou'
+import { Suspense } from 'react'
 
 type Props = {}
 
 const ThankyouPage = (props: Props) => {
+  // * Suspense lets you display a fallback until its children have finished loading
   return (
-    <div>ThankyouPage for bought our products.</div>
+    <Suspense>
+      <Thankyou />
+    </Suspense>
   )
 }
 
