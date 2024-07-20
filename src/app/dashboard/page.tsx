@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation'
 
 type Props = {}
 
-export async function DashboardPage(props: Props) {
+export async function Dashboard(props: Props) {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL
