@@ -9,9 +9,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { notFound } from 'next/navigation'
 
 
-type Props = {}
-
-export async function Dashboard(props: Props) {
+const Dashboard = async () => {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL
@@ -117,4 +115,4 @@ export async function Dashboard(props: Props) {
   )
 }
 
-export default DashboardPage
+export default Dashboard
