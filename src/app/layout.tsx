@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
+
 import { Inter, Recursive } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/custom/Navbar";
 import Footer from "@/components/custom/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "@/components/reutilizable/ReactQueryProvider";
+import constructMetadata from "@/lib/utils";
 
 const recursive = Recursive({ subsets: ["latin"] });
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "starpurple | Cases factory",
-  description: "Designed by Dan Chanivet",
-};
+export const metadata = constructMetadata({});
 
 export default function RootLayout({
   children,

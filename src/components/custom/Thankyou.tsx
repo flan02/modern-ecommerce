@@ -7,11 +7,13 @@ import { useSearchParams } from "next/navigation"
 import Loading from "../reutilizable/Loading"
 import { formatPrice } from "@/lib/utils"
 import PhonePreview from "./PhonePreview"
-
+import Confetti from "react-dom-confetti"
+import { useEffect, useState } from "react"
 
 type Props = {}
 
 const Thankyou = (props: Props) => {
+  const [showConfetti, setShowConfetti] = useState(false)
   const searchParams = useSearchParams()
   const orderId = searchParams.get("orderId") || ""
   const { data } = useQuery({
@@ -20,6 +22,7 @@ const Thankyou = (props: Props) => {
     retry: true,
     retryDelay: 500
   })
+  useEffect(() => setShowConfetti(true), [])
 
   // loading | not yet paid | paid
   if (data === undefined) return <Loading className="" status="Loading your order..." response="This won't take long." />
@@ -30,6 +33,9 @@ const Thankyou = (props: Props) => {
 
   return (
     <div className="bg-white">
+      <div aria-hidden="true" className="pointer-events-none select-none absolute inset-0 overflow-hidden flex justify-center">
+        <Confetti active={showConfetti} config={{ elementCount: 200, spread: 90 }} />
+      </div>
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="max-w-xl">
           <p className="text-base font-medium text-primary">Thank you!</p>

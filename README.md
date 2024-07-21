@@ -21,3 +21,4 @@ E-commerce new features with nextjs14 and stripe
 
 # Emails
 [Modern way of writing emails](react.email)
+[Send emails to all your customers](https://resend.com)

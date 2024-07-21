@@ -62,7 +62,7 @@ const DesignConfigurator = ({ configId, imgUrl, imgDimensions }: Props) => {
   const router = useRouter()
 
   // ? This is the mutation hook that we use to save the model that users have chosen
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["save-config"],
     mutationFn: async (iphone: iphoneCase) => {
       await Promise.all([saveConfig(), _saveConfig(iphone)]) // TODO this two fc will be executed when I called the mutate function
@@ -146,9 +146,6 @@ const DesignConfigurator = ({ configId, imgUrl, imgDimensions }: Props) => {
       })
     }
   }
-
-
-
 
   return (
     <div className="relative mt-20 grid grid-cols-1 lg:grid-cols-3 mb-20 pb-20">
@@ -332,13 +329,18 @@ const DesignConfigurator = ({ configId, imgUrl, imgDimensions }: Props) => {
               <p className="font-medium whitespace-nowrap">
                 {formatPrice((BASE_PRICE + options.finish.price + options.material.price) / 100)}
               </p>
-              <Button size="sm" className="w-full" onClick={() => mutate({
-                color: options.color.value,
-                finish: options.finish.value,
-                material: options.material.value,
-                model: options.model.value,
-                configId
-              })}>
+              <Button size="sm" className="w-full"
+                onClick={() => mutate({
+                  color: options.color.value,
+                  finish: options.finish.value,
+                  material: options.material.value,
+                  model: options.model.value,
+                  configId
+                })}
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
+              >
                 Continue
                 <ArrowRight className="size-4 ml-1.5 inline" />
               </Button>

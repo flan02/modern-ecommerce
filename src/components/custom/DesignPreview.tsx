@@ -37,7 +37,7 @@ const DesignPreview = ({ configuration }: Props) => {
   if (material === MATERIALS.options[1].value) totalPrice += PRODUCT_PRICES.material.polycarbonate
   if (material === MATERIALS.options[2].value) totalPrice += PRODUCT_PRICES.material.leather
 
-  const { mutate: createPaymentSession } = useMutation({
+  const { mutate: createPaymentSession, isPending } = useMutation({
     mutationKey: ["get-checkout-session"],
     mutationFn: createCheckoutSession,
     onSuccess: ({ url }) => {
@@ -73,21 +73,24 @@ const DesignPreview = ({ configuration }: Props) => {
         <Confetti active={showConfetti} config={{ elementCount: 200, spread: 90 }} />
       </div>
       <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
-      <div className="grid grid-cols-1 px-16 sm:px-0 text-sm sm:grid-cols-2 lg:grid-cols-12 md:gap-x-8 lg:gap-x-12 mt-20 mb-8">
-        <div className="md:col-span-4 md:row-span-2 md:row-end-2">
+      <div className="grid grid-cols-1 px-16 sm:px-0 text-sm sm:grid-cols-2 lg:grid-cols-12 md:gap-x-8 lg:gap-x-12 mt-12 mb-8">
+        <div className="md:col-span-1 lg:col-span-4 md:row-span-2 md:row-end-2 mx-auto">
           <Phone
-            className={cn(`bg-${tw}`)}
-            imgSrc={configuration.croppedImageUrl!} />
+            className={cn(`bg-${tw}`, "max-w-[250px] ")}
+            imgSrc={configuration.croppedImageUrl!}
+          />
         </div>
-        <div className="mt-2 md:col-span-9 md:row-end-1">
+
+        <div className=" mt-2 md:col-span-9 md:row-end-1">
           <h3 className='pl-4 md:pl-0 text-center sm:text-start text-2xl mt-8 sm:mt-0 sm:text-3xl font-bold tracking-tight text-gray-900'>Your {label} case</h3>
           <div className="mt-3 w-full flex justify-center md:justify-start items-center gap-1.5 text-base pl-4 md:pl-0">
             <Check className="size-4 text-green-500" />
             <span className=''>In stock and ready to ship</span>
           </div>
         </div>
+
         <div className="sm:col-span-12 md:col-span-9 text-base">
-          <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10 gap-y-8 border-b border-gray-200 py-8">
+          <div className="border grid grid-cols-1 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10 gap-y-8 border-b border-gray-200 py-8">
             <div>
               <p className='font-black text-zinc-950'>Highlights</p>
               <ol className='mt-3 text-zinc-700 list-disc list-inside'>
@@ -154,6 +157,8 @@ const DesignPreview = ({ configuration }: Props) => {
             <div className="mt-4 flex justify-end pb-12">
               <Button
                 onClick={handleCheckout}
+                isLoading={isPending}
+                loadingText='Processing'
                 className='px-4 sm:px-6 lg:px-8'>Check out <ArrowRight className='size-4 ml-1.5 inline' /> </Button>
             </div>
           </div>
