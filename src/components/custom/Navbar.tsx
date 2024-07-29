@@ -3,6 +3,7 @@ import MaxWidthWrapper from "../reutilizable/MaxWidthWrapper"
 import { buttonVariants } from "../ui/button"
 import { ArrowRight } from "lucide-react"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
+import StarPurple from "./StarPurple"
 
 
 type Props = {}
@@ -18,6 +19,7 @@ const NavBar = async (props: Props) => {
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
             star<span className="text-[#7C3AED]">purple</span>
+            <StarPurple className="size-5 mt-1/2 ml-1" />
           </Link>
           <div className="h-full flex items-center space-x-4">
             {
