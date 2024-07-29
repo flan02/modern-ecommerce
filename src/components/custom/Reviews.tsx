@@ -92,7 +92,7 @@ function ReviewGrid() {
 
   return (<div
     ref={containerRef}
-    className="grid-cols-1 items-start gap-8 overflow-hidden px-4 sm:mt-20 md:grid-cols-2 lg:grid-cols-3 relative -mx-4 mt-16 grid h-[49rem] max-h-[150vh]">
+    className="grid-cols-1 items-start gap-8 overflow-hidden sm:mt-20 md:grid-cols-2 lg:grid-cols-3 relative sm:-mx-4 mt-16 grid h-[49rem] max-h-[150vh]">
     {
       isInView
         ? <>

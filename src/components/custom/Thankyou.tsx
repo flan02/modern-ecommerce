@@ -9,11 +9,13 @@ import { formatPrice } from "@/lib/utils"
 import PhonePreview from "./PhonePreview"
 import Confetti from "react-dom-confetti"
 import { useEffect, useState } from "react"
+import { Button } from "../ui/button"
+import Link from "next/link"
 
 type Props = {}
 
 const Thankyou = (props: Props) => {
-  const [showConfetti, setShowConfetti] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(true)
   const searchParams = useSearchParams()
   const orderId = searchParams.get("orderId") || ""
   const { data } = useQuery({
@@ -121,6 +123,9 @@ const Thankyou = (props: Props) => {
             <p className='font-medium text-zinc-900'>Total</p>
             <p className='text-zinc-700'>{formatPrice(amount)}</p>
           </div>
+        </div>
+        <div className="mt-8 text-center">
+          <Link href="/" className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-xl">return to home</Link>
         </div>
       </div>
     </div>

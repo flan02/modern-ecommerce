@@ -52,14 +52,14 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col justify-between items-center sm:items-start">
                   <div className="flex gap-0 5">
-                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
-                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
-                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
-                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
-                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                    <Star className="h-4 w-4 text-purple-600 fill-purple-600" />
+                    <Star className="h-4 w-4 text-purple-600 fill-purple-600" />
+                    <Star className="h-4 w-4 text-purple-600 fill-purple-600" />
+                    <Star className="h-4 w-4 text-purple-600 fill-purple-600" />
+                    <Star className="h-4 w-4 text-purple-600 fill-purple-600" />
                   </div>
-                  <p>
-                    <span className="font-semibold">1.250 </span>
+                  <p className="pt-1">
+                    <span className="font-semibold">117 </span>
                     happy customers
                   </p>
                 </div>
@@ -80,16 +80,16 @@ export default function Home() {
       </section>
 
       {/* value proposition section */}
-      <section className="bg-slate-100 py-24">
+      <section className="bg-slate-100 py-24 ">
         <MaxWidthWrapper className="flex flex-col items-center gap-16 sm:gap-32">
           <div className="flex flex-col lg:flex-row items-center gap-4 sm:gap-6">
             <H2underline firstPhrase="What our" secondPhrase="say" underlinedPhrase="customers" className="pb-2" />
             <StarPurple className="order-0 lg:order-2" />
           </div>
 
-          <div className="mx-auto max-w-2xl grid grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16 items-center">
+          <div className="mx-auto border p-8 max-w-2xl grid grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16 items-center">
             <TestimonialCard className="h-full relative" userImg="/users/user-2.png" userName="Luciana" testimony={`I usually keep my phone together with my keys in my pocket and that led to some pretty heavy sractmarks on all of my last phone cases. This one, besides a barely noticeable scratch on the corner, looks brand new after about half a year. I dig it.`} />
-            <TestimonialCard className="pl-4 h-full relative" userImg="/users/user-1.png" userName="Bruno" testimony={`The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and the image is super clear, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.`} />
+            <TestimonialCard className="pl-4 h-full relative" userImg="/users/user-1.png" userName="Xavier" testimony={`The case feels durable and I even got a compliment on the desing. Had the case for two and a half months now and the image is super clear, on the case I had before, the image started fading into yellow-ish color after couple weeks. Love it.`} />
           </div>
         </MaxWidthWrapper>
 
@@ -98,15 +98,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section >
+      <section>
         <MaxWidthWrapper className="py-24">
           <div className="mb-12 px-6 lg:px-8">
             <div className="mx-auto max-w-2xl sm:text-center">
               <H2underline firstPhrase="Upload your photo and get" secondPhrase="now" underlinedPhrase="your own case" className="pb-4" />
             </div>
           </div>
-          <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <div className="relative flex flex-col items-center md:grid grid-cols-2 gap-40 mt-16">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8 pb-4 md:pb-16">
+            <div className="relative flex flex-col items-center md:grid grid-cols-2 gap-40 mt-8 md:mt-24">
               <img src="/arrow.png" className="absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0" alt="Arrow" />
               <div className="relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl">
                 <img src="/horse.jpg" alt="" className="rounded-md object-cover bg-white shadow-2xl ring-1 ring-gray-900/10 h-full w-full" />
